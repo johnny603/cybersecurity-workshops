@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }} - My App</title>
+	
+</head>
+<body>
+	<!--nav>
+	<a href="/">Home</a>
+	</nav-->
+<main class="content">
+	<img src="/logo.svg">
+	
+	<p>Welcome, <i>non-admin!</i></p>
+	<p>You have been tasked with intermittently checking the date of the server. Apparently, we are trying to catch the prankster who keeps changing the time and date in the act... Don't ask me why, you're getting paid? Right? </p>
+	
+	<form action="/" method="post">
+	<select name="commands" id="commands">
+		<option value="" disabled selected>--Please choose an option--</option>
+		<option value="date">date</option>
+		<option value="id">id</option>
+		<option value="whoami">whoami</option>
+	</select>
+	<input type="submit" value="Submit">
+	</form>
+	<pre><code>{{output}}</code></pre>
+
+</main>
+<style>
+body {
+	background-color: black;
+	color: green;
+	font-size: 2rem;
+	font-family: "Courier New", monospace, sans-serif; 
+}
+code {
+	padding: 5px;
+	background-color: #2b2b2b;
+	border-radius: 10px;
+	overflow-wrap: break-word;
+}
+select, input {
+	font: inherit;
+	font-size: 1.5rem;
+	
+}
+img {
+	
+	width: 400px;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }} - My App</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="content">
+	<p>I built a feature that lets you test edits to your profile page! It even supports HTML! Isn't that cool?</p>
+	<p>Try it! <pre><code>&lt;h1&gt;Header text!&lt;&sol;h1&gt;</code></pre>Hit submit to see the output</p>
+	
+	<form action="/" method="post">
+		<textarea id="editor" name="editor" rows="4" cols="50"></textarea>
+		<input type="submit" value="Submit">
+	</form>
+	{{preview|safe}}
+	{# bahh im sure its fine like this ... its not, thats the vulnerability #}
+
+</main>
+<style>
+	body, textarea, input {
+		font-size: 1.5rem;
+	}
+</style>
+</body>
+</html>

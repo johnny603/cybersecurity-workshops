@@ -1,0 +1,93 @@
+services:
+  # SQL Injection - PHP
+  sqli:
+    build: ./sqli
+    ports:
+      - "2222:22"
+      - "8005:80"
+    volumes:
+      - ./sqli:/var/www/html
+    depends_on:
+      - sqli-db
+    networks:
+      - sqli-network
+
+  # SQL Injection - MySQL / MariaDB
+  sqli-db:
+    image: mariadb:11.4
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: sqli
+      #MYSQL_DATABASE: my_database
+      #MYSQL_USER: my_user
+      #MYSQL_PASSWORD: your_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./sqli/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./sqli/db:/var/lib/mysql
+    networks:
+      - sqli-network
+
+  # Directory Traversal
+  dirtrav:
+    build: ./dirtrav
+    ports:
+      - "8001:80"
+    volumes:
+      - ./dirtrav:/var/www/html
+    networks:
+      - dirtrav-network
+
+  # Server-Side Template Injection
+  ssti:
+    image: python:3.10-slim
+    ports:
+      - "8003:5000"
+    volumes:
+      - ./templatei:/app
+    working_dir: /app
+    command: >
+      sh -c "echo 'gator{d0_wh4t_i_s4y}' > /flag.txt && pip install flask && flask run --host=0.0.0.0"
+    networks:
+      - ssti-network
+
+  # Command Injection
+  cmdi:
+    image: python:3.10-slim
+    ports:
+      - "8002:5000"
+    volumes:
+      - ./cmdi:/app
+    working_dir: /app
+    command: >
+      sh -c "echo 'gator{br0k3n_c0mm4nd}' > /flag.txt && apt-get update && apt-get install -y netcat-openbsd && pip install flask && flask run --host=0.0.0.0"
+    networks:
+      - cmdi-network
+
+  # Server-Side Request Forgery
+  ssrf:
+    image: python:3.10-slim
+    ports:
+      - "8004:5000"
+    volumes:
+      - ./ssrf:/app
+    working_dir: /app
+    command: >
+      sh -c "pip install flask && pip install requests && flask run --host=0.0.0.0"
+    networks:
+      - ssrf-network
+
+networks:
+  sqli-network:
+    driver: bridge
+  dirtrav-network:
+    driver: bridge
+  ssti-network:
+    driver: bridge
+  cmdi-network:
+    driver: bridge
+  ssrf-network:
+    driver: bridge
+  
+

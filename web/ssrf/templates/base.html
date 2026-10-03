@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>{{ title }} - My App</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<!--nav>
+	<a href="/">Home</a>
+	</nav-->
+<main class="content">
+	<p>Welcome, non-admin!</p>
+	<p>You have been tasked with intermittently checking the date of the server. Apparently, we are trying to catch the prankster who keeps changing the time and date in the act... Don't ask me why, you're getting paid? Right? </p>
+	
+	<form action="/" method="post">
+	<select name="commands" id="commands">
+		<option value="" disabled selected>--Please choose an option--</option>
+		<option value="date">date</option>
+		<option value="id">id</option>
+		<option value="whoami">whoami</option>
+		<option value="w">w</option>
+	</select>
+	<input type="submit" value="Submit">
+	</form>
+	<pre><code>{{output}}</code></pre>
+
+</main>
+
+</body>
+</html>
