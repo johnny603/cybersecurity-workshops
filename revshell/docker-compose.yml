@@ -1,32 +1,38 @@
 services:
   revshell-easy:
-    build: ./one
+    build: 
+      context: .
+      dockerfile: ./one/Dockerfile
     ports:
       - "8000:5000"
     volumes:
-      - ./:/app
+      - ./app:/app
     working_dir: /app
     command: >
       sh -c "echo 'gator{n3tc4t_ftw}' > /flag.txt && flask run --host=0.0.0.0"
     networks:
       - easy-network
   revshell-fifo:
-    build: ./two
+    build: 
+      context: .
+      dockerfile: ./two/Dockerfile
     ports:
       - "8001:5000"
     volumes:
-      - ./:/app
+      - ./app:/app
     working_dir: /app
     command: >
       sh -c "echo 'gator{really_l0ng_cmd}' > /flag.txt && flask run --host=0.0.0.0"
     networks:
       - fifo-network
   revshell-python:
-    build: ./three
+    build: 
+      context: .
+      dockerfile: ./three/Dockerfile
     ports:
       - "8002:5000"
     volumes:
-      - ./:/app
+      - ./app:/app
     working_dir: /app
     command: >
       sh -c "echo 'gator{use_wh4t_y0u_can}' > /flag.txt && flask run --host=0.0.0.0"
